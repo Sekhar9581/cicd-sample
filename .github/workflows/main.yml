@@ -20,3 +20,10 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+      
+    - name: Deploy to QA
+      if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+      run: echo "QA"
+    - name: Deploy to Production
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: echo "PROD"
